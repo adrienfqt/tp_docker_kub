@@ -1,26 +1,64 @@
 services:
-  client:
-    image: nginx:latest
-    ports:
-      - "3000:80"
-  comments:
-    image: node:latest
-    ports:
-      - "4001:4001"
+    comments:
+        build:
+            context: ./comments
+            dockerfile: Dockerfile
+        container_name: comments
+        ports:
+            - "4001:4001"
+        networks:
+            - microservices
 
-  event-bus:
-    image: node:latest
-    ports:
-      - "4005:4005"
-  moderation:
-    image: node:latest
-    ports:
-      - "4003:4003"
-  posts:
-    image: node:latest
-    ports:
-      - "4000:4000"
-  query:
-    image: node:latest
-    ports:
-      - "4002:4002"
+    event-bus:
+        build:
+            context: ./event-bus
+            dockerfile: Dockerfile
+        container_name: event-bus
+        ports:
+            - "4005:4005"
+        networks:
+            - microservices
+
+    moderation:
+        build:
+            context: ./moderation
+            dockerfile: Dockerfile
+        container_name: moderation
+        ports:
+            - "4003:4003"
+        networks:
+            - microservices
+
+    posts:
+        build:
+            context: ./posts
+            dockerfile: Dockerfile
+        container_name: posts
+        ports:
+            - "4000:4000"
+        networks:
+            - microservices
+
+    query:
+        build:
+            context: ./query
+            dockerfile: Dockerfile
+        container_name: query
+        ports:
+            - "4002:4002"
+        networks:
+            - microservices
+
+    client:
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        container_name: client
+        ports:
+            - "3000:80"
+        networks:
+            - microservices
+
+networks:
+    microservices:
+        driver: bridge
