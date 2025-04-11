@@ -4,6 +4,7 @@ metadata:
     name: ingress-service
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /
+        nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
     ingressClassName: nginx
     rules:
@@ -24,17 +25,17 @@ spec:
                             name: query-srv
                             port:
                                 number: 4002
-                  - path: /posts/?(.*)/comments
-                    pathType: Prefix
+                  - path: /posts/(.*)/comments
+                    pathType: ImplementationSpecific
                     backend:
                         service:
                             name: comments-srv
                             port:
                                 number: 4001
                   - path: /?(.*)
-                    pathType: Prefix
+                    pathType: ImplementationSpecific
                     backend:
                         service:
                             name: client-srv
                             port:
-                                number: 3000
+                                number: 80

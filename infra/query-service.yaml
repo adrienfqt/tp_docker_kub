@@ -31,3 +31,4 @@ spec:
     ports:
         - port: 4002
           targetPort: 4002
+
