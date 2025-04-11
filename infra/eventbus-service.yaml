@@ -16,6 +16,7 @@ spec:
             containers:
                 - name: event-bus
                   image: event-bus
+                  imagePullPolicy: Never
                   ports:
                       - containerPort: 4005
 ---

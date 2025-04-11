@@ -16,6 +16,7 @@ spec:
             containers:
                 - name: query
                   image: query
+                  imagePullPolicy: Never
                   ports:
                       - containerPort: 4002
 ---

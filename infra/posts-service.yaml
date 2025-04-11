@@ -16,6 +16,7 @@ spec:
             containers:
                 - name: posts
                   image: posts
+                  imagePullPolicy: Never
                   ports:
                       - containerPort: 4000
 ---

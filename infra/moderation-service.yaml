@@ -16,6 +16,7 @@ spec:
             containers:
                 - name: moderation
                   image: moderation
+                  imagePullPolicy: Never
                   ports:
                       - containerPort: 4003
 ---
